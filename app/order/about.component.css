@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+ActionBar {
+    background-color: #E8EAF6;
+    color: #303F9F;
+}
+
+.about-wrap {
+    font-family: 'Slabo 27px', serif;
+    padding: 20;
+}
+.about-header {
+    font-size: 24;
+    font-family: 'Slabo 27px', serif;
+    margin: 0 0 10;
+}
+.about-text {
+    font-size: 16;
+    line-height: 1.4;
+    font-family: 'Slabo 27px', serif;
+    margin: 0 0 10;
+}
+.about-link {
+    color: #303F9F;
+}
+.button {
+    background-color: #303F9F;
+    color: #fff;
+    font-size: 14;
+    font-family: 'Roboto';
+}

@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+ActionBar {
+    font-family: 'Slabo 27px', serif;
+    background-color: #E8EAF6;
+    color: #3F51B5;
+}
+
+.order-webview {
+    margin: 10;
+}
+
+.shareBar {
+    font-family: 'Roboto-Bold';
+    background-color: #3F51B5;
+    color: #fff;
+    padding: 12;
+}
+
+.shareBar .button-icon {
+    margin-right: 5;
+    font-size: 18;
+}

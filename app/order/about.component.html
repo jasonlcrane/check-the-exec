@@ -1,0 +1,26 @@
+<ActionBar title=" Check the Exec" android.icon="res://ic_equalizer_indigo_24dp" android.iconVisibility="always">
+</ActionBar>
+<ScrollView>
+    <StackLayout class="about-wrap">
+        <Label text="Thanks" class="about-header"></Label>
+        <Label textWrap="true" class="about-text about-link" textWrap="true"
+               (tap)="openLink('https://www.federalregister.gov/')"
+               text="Federal Register, provider of the president's executive action data"></Label>
+        <Label textWrap="true" class="about-text about-link" textWrap="true"
+               (tap)="openLink('https://www.propublica.org/')"
+               text="ProPublica and (formerly) Sunlight Labs, publishers of the congressional representative data"></Label>
+        <Label textWrap="true" class="about-text about-link" textWrap="true"
+               (tap)="openLink('https://www.nativescript.org/')"
+               text="NativeScript, the open source framework used to build this app"></Label>
+        <Label textWrap="true" class="about-text" textWrap="true"
+               (tap)="openLink('https://www.nativescript.org/')"
+               text="Tap any of the above to visit their sites. And support the great work of ProPublica with a donation if you can. The kind of public interest, investigative journalism they do grows more important by the day."></Label>
+        <Label textWrap="true" class="about-text" textWrap="true"
+               (tap)="openLink('https://www.nativescript.org/')"
+               text="The executive action data isn't updated on the Federal Register data source quite as often as I'd like. If you expect to see a new one, give it a few days, it will show up."></Label>
+        <Label textWrap="true" class="about-text" textWrap="true"
+               (tap)="openLink('https://www.nativescript.org/')"
+               text="Lastly, you will occasionally see ads when using the app. Just trying to keep the lights on around here, thanks for your support. Your feedback and reviews are welcome."></Label>
+        <Button class="button" text="Back" (tap)="goBack();"></Button>
+    </StackLayout>
+</ScrollView>

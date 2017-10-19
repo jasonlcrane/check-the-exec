@@ -1,0 +1,90 @@
+<!--<ActionBar title=" Check the Exec" class="action-bar" android.icon="res://ic_equalizer_white_24dp" android.iconVisibility="always">-->
+<!--</ActionBar>-->
+<ActionBar title=" Check the Exec" android.icon="res://ic_equalizer_indigo_24dp" android.iconVisibility="always">
+    <ActionItem (tap)="showAbout()"
+                text="About"
+                android.icon="res://ic_help_white_24dp"
+                android.position="popup"></ActionItem>
+</ActionBar>
+<StackLayout>
+    <TabView #tabview [selectedIndex]="tabindex" (selectedIndexChanged)="onSelectedIndexChanged">
+        <StackLayout class="tab-title" *tabItem="{title: 'Executive Actions'}">
+            <ScrollView>
+                <StackLayout>
+                    <order-list *ngFor="let order of orders; let index=index;">
+                        <StackLayout class="order" [class.odd]="index % 2">
+                            <StackLayout orientation="horizontal">
+                                <Label class="document-type" text="{{order.subtype}}"></Label>
+                                <Label *ngIf="order.signing_date" class="document-date" text="{{order.signing_date | date}}"></Label>
+                            </StackLayout>
+                            <Label (tap)="onClick(order)" [text]="order.title"
+                                   textWrap="true" class="order-title"></Label>
+                            <!--<Label class="order-sign-date" textWrap="true" text="Signed {{order.signing_date | date}}"></Label>-->
+                            <StackLayout orientation="horizontal" class="button-wrap">
+                                <StackLayout orientation="horizontal" (tap)="onClick(order)" >
+                                    <Label class="mdi button-icon" [text]="'mdi-chrome-reader-mode' | fonticon"></Label>
+                                    <Label class="button button-read" text="Read"></Label>
+                                </StackLayout>
+                                <StackLayout orientation="horizontal" (tap)="shareDoc(order.body_html_url)">
+                                    <Label class="mdi button-icon" [text]="'mdi-share' | fonticon"></Label>
+                                    <Label class="button button-share" text="Share"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </order-list>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+        <StackLayout class="tab-title" *tabItem="{title: 'Your voice'}">
+            <ScrollView>
+                <StackLayout>
+                    <Label textWrap="true" class="section-intro" text="Have something to say about one of President Trump's executive actions?"></Label>
+                    <Label textWrap="true" class="section-intro last" text="Contact your representatives in D.C. and make your voice heard. Enter your ZIP code to find your representatives."></Label>
+                    <StackLayout class="rep-zip" *ngIf="!repsLoaded">
+                        <TextField hint="5-digit ZIP code" keyboardType="number" [(ngModel)]="zip"
+                                   autocorrect="false" autocapitalizationType="none" (returnPress)="submitZip(zip)"></TextField>
+                        <Button (tap)="submitZip(zip)" text="Find your reps"></Button>
+                    </StackLayout>
+                    <StackLayout class="rep-zip" *ngIf="repsLoaded">
+                        <Label class="link-button" (tap)="showZipForm()" text="Enter new ZIP"></Label>
+                    </StackLayout>
+                    <order-list *ngFor="let rep of representatives; let index=index;">
+                        <StackLayout class="order" [class.odd]="index % 2">
+                            <StackLayout orientation="horizontal">
+                                <Label class="document-type" text="{{rep?.chamber | capitalize}}"></Label>
+                                <Label *ngIf="rep.district" class="rep-district" text=" District {{rep?.district}}"></Label>
+                            </StackLayout>
+                            <Label text="{{rep?.first_name}} {{rep?.last_name}}"
+                                   class="order-title rep-title"></Label>
+                            <!--<Label class="order-sign-date" textWrap="true" text="Signed {{order.signing_date | date}}"></Label>-->
+                            <StackLayout orientation="horizontal" class="button-wrap" (tap)="call(rep.phone)">
+                                <Label class="mdi button-icon" [text]="'mdi-call' | fonticon"></Label>
+                                <Label class="button button-share button-mdi mdi-share mdi" text="Call {{rep?.phone}}"></Label>
+                            </StackLayout>
+                            <StackLayout *ngIf="rep.oc_email" orientation="horizontal" class="button-wrap" (tap)="sendEmail(rep.oc_email)">
+                                <Label class="mdi button-icon" [text]="'mdi-mail' | fonticon"></Label>
+                                <Label class="button button-share button-mdi mdi-share mdi" text="Email {{rep?.last_name}}"></Label>
+                            </StackLayout>
+                            <!--<StackLayout *ngIf="rep.contact_form" orientation="horizontal" class="button-wrap" (tap)="openLink(rep.contact_form)">-->
+                                <!--<Label class="mdi button-icon" [text]="'mdi-chat' | fonticon"></Label>-->
+                                <!--<Label class="button button-share button-mdi mdi-share mdi" text="Use {{rep?.last_name}}'s contact form"></Label>-->
+                            <!--</StackLayout>-->
+                            <StackLayout *ngIf="rep.twitter_id" orientation="horizontal" class="button-wrap" (tap)="openLink('https://twitter.com/' + rep.twitter_id)">
+                                <Label class="mdi button-icon" [text]="'mdi-comment' | fonticon"></Label>
+                                <Label class="button button-share button-mdi mdi-share mdi" text="Tweet to @{{rep?.twitter_id}}"></Label>
+                            </StackLayout>
+                            <StackLayout *ngIf="rep.website" orientation="horizontal" class="button-wrap" (tap)="openLink(rep.website)">
+                                <Label class="mdi button-icon" [text]="'mdi-bookmark' | fonticon"></Label>
+                                <Label class="button button-share button-mdi mdi-share mdi" text="Visit {{rep?.last_name}}'s website"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </order-list>
+                    <Label class="resource" textWrap="true" text="Don't know what to say? Check out the scripts (and other resources) at:"></Label>
+                    <Label class="resource large" (tap)="openLink('http://thesixtyfive.org/')" text="thesixtyfive.org"></Label>
+                    <Label class="resource large" (tap)="openLink('https://5calls.org/')" text="5calls.org"></Label>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </TabView>
+</StackLayout>

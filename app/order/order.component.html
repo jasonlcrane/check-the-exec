@@ -1,0 +1,17 @@
+<ActionBar title=" Check the Exec" android.icon="res://ic_equalizer_indigo_24dp" android.iconVisibility="always">
+    <ActionItem (tap)="showAbout()"
+                text="About"
+                android.icon="res://ic_help_white_24dp"
+                android.position="popup"></ActionItem>
+</ActionBar>
+<GridLayout columns="*" rows="auto *">
+    <StackLayout
+            (tap)="shareDoc(order.body_html_url)"
+            class="shareBar" col="0" row="0" orientation="horizontal">
+        <Label class="mdi button-icon" [text]="'mdi-share' | fonticon"></Label>
+        <Label text="Share this {{order.subtype}}"></Label>
+    </StackLayout>
+    <ScrollView col="0" row="1" class="order-webview">
+        <WebView id="wv" [src]="(order.body_html_url)"></WebView>
+    </ScrollView>
+</GridLayout>
